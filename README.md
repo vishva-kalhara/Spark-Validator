@@ -114,3 +114,7 @@ The `Spark` library provides a fluent interface for validating and transforming 
 
 -   `SparkException(String error)`
     -   Initializes a `SparkException` instance with the specified error message.
+
+## License
+
+Create React App is open source software [Licensed as MIT](https://github.com/vishva-kalhara/Spark-Validator/blob/master/README.md)
