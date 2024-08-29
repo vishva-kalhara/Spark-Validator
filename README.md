@@ -75,6 +75,14 @@ The `Spark` library provides a fluent interface for validating and transforming 
 
     -   Ensures that the input string does not exceed the maximum length. Throws `SparkException` with a custom message if the input is longer than the specified length.
 
+-   `Spark regex(String pattern) throws SparkException`
+
+    -   Validates that the input string matches the specified regular expression pattern. Throws `SparkException` with a default message if the input does not match the pattern.
+
+-   `Spark regex(String pattern, String msg) throws SparkException`
+
+    -   Validates that the input string matches the specified regular expression pattern. Throws `SparkException` with a custom message if the input does not match the pattern.
+
 -   `String endString() throws SparkException`
     -   Returns the validated string input. Throws `SparkException` if the input was initially an integer.
 

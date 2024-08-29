@@ -121,6 +121,22 @@ public class Spark {
         }
         return this;
     }
+    
+    public Spark regex(String pattern) throws SparkException {
+        
+        if(!this.inputStr.matches(pattern)){
+            throw new SparkException("Invalid " + displayName + " !");
+        }
+        return this;
+    }
+
+    public Spark regex(String pattern, String msg) throws SparkException {
+        
+        if(!this.inputStr.matches(pattern)){
+            throw new SparkException(msg);
+        }
+        return this;
+    }
 
     public String endString() throws SparkException  {
         
@@ -183,6 +199,7 @@ public class Spark {
             return Integer.parseInt(this.inputStr);
         }
 
+        
         return this.inputInt;
     }
 }
