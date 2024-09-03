@@ -6,7 +6,7 @@ The `Spark` library provides a fluent interface for validating and transforming 
 
 ## Package
 
-`com.wishva`
+`com.wishva.validator`
 
 ## Classes
 
