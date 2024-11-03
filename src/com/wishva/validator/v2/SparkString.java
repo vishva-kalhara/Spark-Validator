@@ -24,6 +24,7 @@
 package com.wishva.validator.v2;
 
 import com.wishva.validator.SparkException;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
@@ -43,6 +44,7 @@ public class SparkString {
      *
      * @param displayName the name of the field being validated.
      * @param input the input {@code String} to be validated.
+     * @throws com.wishva.validator.SparkException
      */
     public SparkString(String displayName, String input) throws SparkException {
 
@@ -52,6 +54,23 @@ public class SparkString {
 
         this.displayName = displayName;
         this.str = input;
+    }
+
+    /**
+     * Constructs a new {@code Spark} validator for a {@code char[]} input.
+     *
+     * @param displayName the name of the field being validated.
+     * @param input the input {@code String} to be validated.
+     * @throws com.wishva.validator.SparkException
+     */
+    public SparkString(String displayName, char[] input) throws SparkException {
+
+        if (this.str.length() > 1000) {
+            throw new SparkException("Input is too long.");
+        }
+
+        this.displayName = displayName;
+        this.str = Arrays.toString(input);
     }
 
     /**
