@@ -1,117 +1,192 @@
-# Spark Validator
+# Spark Validator v2.0.0
 
 ## Overview
 
 The `Spark` library provides a fluent interface for validating and transforming input data in Java. It includes functionality for validating strings and integers with a variety of built-in methods, making it easy to chain validation operations together.
 
-## Package
+## Packages
 
-`com.wishva.validator`
+-   `com.wishva.validator`
+-   `com.wishva.validator.v2`
 
 ## Classes
 
--   `Spark`
--   `SparkException`
+-   `com.wishva.validator.v2.SparkString`
+-   `com.wishva.validator.v2.SparkInt`
+-   `com.wishva.validator.v2.SparkDouble`
+-   `com.wishva.validator.SparkException`
+-   `com.wishva.validator.Spark @Depricated `
 
-## Spark Class
+# SparkString Class
 
-### Fields
+The `SparkString` class provides a set of validation methods for `String` inputs, allowing developers to validate field requirements, check length constraints, ensure valid email formats, and more. The class supports method chaining for streamlined validation flows.
 
--   `private String displayName`
+## Package
+
+`com.wishva.validator.v2`
+
+## Constructors
+
+-   `SparkString(String displayName, String input) throws SparkException`
+
+    -   Initializes a `SparkString` instance with a string input.
+
+-   `SparkString(String displayName, char[] input) throws SparkException`
+    -   Initializes a `SparkString` instance with a character array input, converting it to a string.
+
+## Fields
+
+-   `String displayName`
+
     -   The display name for the input field.
--   `private String inputStr`
-    -   The input value as a string.
--   `private int inputInt`
-    -   The input value as an integer.
--   `private static final String EMAIL_REGEX`
-    -   The regular expression for validating email addresses.
--   `private static final Pattern pattern`
-    -   The compiled pattern for validating email addresses.
 
-### Constructors
+-   `String str`
 
--   `Spark(String displayName, String input)`
+    -   Holds the input string value for validation.
 
-    -   Initializes a `Spark` instance with a string input.
+-   `static final String EMAIL_REGEX`
+    -   A regular expression pattern for validating email addresses.
 
--   `Spark(String displayName, char[] input)`
+## Methods
 
-    -   Initializes a `Spark` instance with a character array input, converting it to a string.
-
--   `Spark(String displayName, int input)`
-    -   Initializes a `Spark` instance with an integer input.
-
-### String Methods
-
--   `Spark required() throws SparkException`
+-   `SparkString required() throws SparkException`
 
     -   Ensures that the input string is not blank. Throws `SparkException` if the input is blank.
 
--   `Spark required(String errorMessage) throws SparkException`
+-   `SparkString required(String errorMessage) throws SparkException`
 
-    -   Ensures that the input string is not blank. Throws `SparkException` with a custom error message if the input is blank.
+    -   Ensures that the input string is not blank, using a custom error message. Throws `SparkException` if the input is blank.
 
--   `Spark email() throws SparkException`
+-   `SparkString email() throws SparkException`
 
     -   Validates that the input string is a valid email address. Throws `SparkException` if the input is not a valid email.
 
--   `Spark equals(String otherString, String msg) throws SparkException`
+-   `SparkString equals(String otherString, String msg) throws SparkException`
 
-    -   Ensures that the input string equals the specified string. Throws `SparkException` with a custom message if they do not match.
+    -   Validates that the input string is equal to another specified string. Throws `SparkException` if the strings are not equal.
 
--   `Spark minLength(int length) throws SparkException`
+-   `SparkString minLength(int length) throws SparkException`
 
-    -   Ensures that the input string has a minimum length. Throws `SparkException` if the input is shorter than the specified length.
+    -   Ensures that the input string meets a specified minimum length requirement. Throws `SparkException` if the input is shorter than the minimum length.
 
--   `Spark minLength(int length, String msg) throws SparkException`
+-   `SparkString minLength(int length, String msg) throws SparkException`
 
-    -   Ensures that the input string has a minimum length. Throws `SparkException` with a custom message if the input is shorter than the specified length.
+    -   Ensures that the input string meets a specified minimum length, with a custom error message. Throws `SparkException` if the input is shorter than the specified length.
 
--   `Spark maxLength(int length) throws SparkException`
+-   `SparkString maxLength(int length) throws SparkException`
 
-    -   Ensures that the input string does not exceed the maximum length. Throws `SparkException` if the input is longer than the specified length.
+    -   Ensures that the input string does not exceed a specified maximum length. Throws `SparkException` if the input exceeds the maximum length.
 
--   `Spark maxLength(int length, String msg) throws SparkException`
+-   `SparkString maxLength(int length, String msg) throws SparkException`
 
-    -   Ensures that the input string does not exceed the maximum length. Throws `SparkException` with a custom message if the input is longer than the specified length.
+    -   Ensures that the input string does not exceed a specified maximum length, with a custom error message. Throws `SparkException` if the input exceeds the specified length.
 
--   `Spark regex(String pattern) throws SparkException`
+-   `SparkString regex(String pattern) throws SparkException`
 
-    -   Validates that the input string matches the specified regular expression pattern. Throws `SparkException` with a default message if the input does not match the pattern.
+    -   Validates the input string against a specified regular expression pattern. Throws `SparkException` if the input does not match the pattern.
 
--   `Spark regex(String pattern, String msg) throws SparkException`
+-   `SparkString regex(String pattern, String msg) throws SparkException`
 
-    -   Validates that the input string matches the specified regular expression pattern. Throws `SparkException` with a custom message if the input does not match the pattern.
+    -   Validates the input string against a specified regular expression pattern, with a custom error message. Throws `SparkException` if the input does not match the pattern.
 
--   `String endString() throws SparkException`
-    -   Returns the validated string input. Throws `SparkException` if the input was initially an integer.
+-   `String toString()`
 
-### Integer Methods
+    -   Ends the validation chain and returns the validated string.
 
--   `Spark toInt() throws SparkException`
+-   `SparkInt toInt() throws SparkException`
+    -   Converts the input string to an integer. Throws `SparkException` if the input is not a valid number.
 
-    -   Converts the string input to an integer. Throws `SparkException` if the string is not a valid integer.
+# SparkInt Class
 
--   `Spark min(int val) throws SparkException`
+The `SparkInt` class is used for validating integer inputs by enforcing minimum and maximum value constraints. It provides methods for chaining validations and retrieving the validated integer value.
 
-    -   Ensures that the input integer is greater than or equal to the specified value. Throws `SparkException` if it is less.
+## Package
 
--   `Spark min(int val, String msg) throws SparkException`
+`com.wishva.validator.v2`
 
-    -   Ensures that the input integer is greater than or equal to the specified value. Throws `SparkException` with a custom message if it is less.
+## Constructors
 
--   `Spark max(int val) throws SparkException`
+-   `SparkInt(String displayName, int input)`
 
-    -   Ensures that the input integer is less than or equal to the specified value. Throws `SparkException` if it is greater.
+    -   Initializes a `SparkInt` instance with a string input.
 
--   `Spark max(int val, String msg) throws SparkException`
+## Fields
 
-    -   Ensures that the input integer is less than or equal to the specified value. Throws `SparkException` with a custom message if it is greater.
+-   `int num`
 
--   `int endInt()`
-    -   Returns the validated integer input. Converts the string input to an integer if necessary.
+    -   Holds the integer input value for validation.
 
-## SparkException Class
+-   `String displayName`
+    -   The display name of the input field, used for custom error messages.
+
+## Methods
+
+-   `SparkInt min(int val) throws SparkException`
+
+    -   Ensures that the integer input meets a specified minimum value.
+
+-   `SparkInt min(int val, String msg) throws SparkException`
+
+    -   Ensures that the integer input meets a specified minimum value, with a custom error message.
+
+-   `SparkInt max(int val) throws SparkException`
+    -   Ensures that the integer input does not exceed a specified maximum value.
+-   `SparkInt max(int val, String msg) throws SparkException`
+
+    -   Ensures that the integer input does not exceed a specified maximum value, with a custom error message.
+
+-   `int toInt()`
+    -   Ends the validation chain and returns the validated integer.
+
+# SparkDouble Class
+
+The `SparkDouble` class is designed for validating double inputs by enforcing minimum and maximum value constraints. It provides methods for chaining validations and retrieving the validated double value.
+
+## Package
+
+`com.wishva.validator.v2`
+
+## Constructors
+
+-   `SparkDouble(String displayName, double input)`
+
+    -   Initializes a `SparkDouble` instance with a string input.
+
+## Fields
+
+-   `double num`
+
+    -   Holds the double input value for validation.
+
+-   `String displayName`
+    -   The display name of the input field, used for custom error messages.
+
+## Methods
+
+-   `SparkDouble min(double val) throws SparkException`
+
+    -   Ensures that the double input meets a specified minimum value.
+
+-   `SparkDouble min(double val, String msg) throws SparkException`
+
+    -   Ensures that the double input meets a specified minimum value, with a custom error message.
+
+-   `SparkDouble max(double val) throws SparkException`
+
+    -   Ensures that the double input does not exceed a specified maximum value.
+
+-   `SparkDouble max(double val, String msg) throws SparkException`
+
+    -   Ensures that the double input does not exceed a specified maximum value, with a custom error message.
+
+-   `double toDouble()`
+    -   Ends the validation chain and returns the validated double.
+
+# SparkException Class
+
+## Package
+
+`com.wishva.validator`
 
 ### Fields
 
@@ -123,6 +198,6 @@ The `Spark` library provides a fluent interface for validating and transforming 
 -   `SparkException(String error)`
     -   Initializes a `SparkException` instance with the specified error message.
 
-## License
+# License
 
 Create React App is open source software [Licensed as MIT](https://github.com/vishva-kalhara/Spark-Validator/blob/master/README.md)
